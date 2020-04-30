@@ -2,7 +2,7 @@
 Steps to run True-caller-rest Version 1.0.0 are given below:
 ------------------------------------------------------------
 
-1. Install any IDE like Eclipse,Intellij
+1. Install any IDE like Eclipse,Intellij,NetBeans
 2. Install Database MySQl
 3. Import source code into IDE
 4. Run the database scripts present in True-caller-rest/database Folder
