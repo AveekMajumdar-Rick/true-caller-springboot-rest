@@ -1,0 +1,22 @@
+------------------------------------------------------------
+Steps to run True-caller-rest Version 1.0.0 are given below:
+------------------------------------------------------------
+
+1. Install any IDE like Eclipse,Intellij
+2. Install Database MySQl
+3. Import source code into IDE
+4. Run the database scripts present in True-caller-rest/database Folder
+5. Import the Postman collections present in True-caller-rest/postman Folder including the environment variable
+6. Perform mvn clean install
+7. Right click on Project Run as Java Application will find com.caller.SpringBootStarterApplication.java file
+
+
+------------------------------------------------------------
+ Steps to run postman endpoints
+ ----------------------------------------------------------
+ 
+ 1. First step hit /verify endpoint with phonenumber and password as request body 
+ 2. Second hit /Authenticate endpoint with the same phonenumber and password as request body
+ 3. Register using /register the User with name, same phonenumber provided and emailAddress which is optional
+ 4. rest to fetch data you can you /search/{phone_number} , /search/user/{name} endpoints
+ 5 To mark spam use /spam/{phone_number}/{mark_spam} endpoint 
