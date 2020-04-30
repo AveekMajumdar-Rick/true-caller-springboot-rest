@@ -32,18 +32,18 @@ public class CallManagementController {
 		return ResponseEntity.ok(callManagementService.create(user, request));
 	}
 
-	@GetMapping(value = "/search/{phone_number}")
+	@GetMapping(value = { "/search", "/search/{phone_number}" })
 	public ResponseEntity<RegisterUser> searchByPhonenumber(
 			@PathVariable(name = "phone_number", required = true) String phonenumber) {
 		return ResponseEntity.ok(callManagementService.findByPhonenumber(phonenumber));
 	}
 
-	@GetMapping(value = "/search/user/{name}")
+	@GetMapping(value = { "/search/user" , "/search/user/{name}" })
 	public ResponseEntity<List<RegisterUser>> searchByName(@PathVariable(name = "name", required = true) String name) {
 		return ResponseEntity.ok(callManagementService.findByName(name));
 	}
 
-	@PutMapping(value = "/spam/{phone_number}/{mark_spam}")
+	@PutMapping(value = { "/spam" , "/spam/{phone_number}/{mark_spam}" } )
 	public String markSpam(@PathVariable(name = "phone_number", required = true) String phonenumber,
 			@PathVariable(name = "mark_spam", required = true) boolean spam) throws Exception {
 		return callManagementService.update(phonenumber, spam);
