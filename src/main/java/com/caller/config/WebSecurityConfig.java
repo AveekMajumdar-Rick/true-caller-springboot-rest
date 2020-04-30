@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.csrf().disable()
 				// dont authenticate this particular request
-				.authorizeRequests().antMatchers("/caller/v1/authenticate", "/caller/v1/verify").permitAll().
+				.authorizeRequests().antMatchers("/caller/v1/authenticate", "/caller/v1/verify" ,"/v2/api-docs").permitAll().
 				// all other requests need to be authenticated
 				anyRequest().authenticated().and().securityContext()
 				.securityContextRepository(new NullSecurityContextRepository()).and().
