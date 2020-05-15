@@ -1,5 +1,5 @@
 ------------------------------------------------------------
-Steps to run True-caller-rest Version 1.0.0 are given below:
+Steps to run True-caller-rest Version 1.0.2 are given below:
 ------------------------------------------------------------
 
 1. Install any IDE like Eclipse,Intellij,NetBeans
@@ -10,6 +10,10 @@ Steps to run True-caller-rest Version 1.0.0 are given below:
 6. Perform mvn clean install
 7. Right click on Project Run as Java Application will find com.caller.SpringBootStarterApplication.java file
 
+-------------------------------------------------------------
+        Technologies Used
+-------------------------------------------------------------
+Spring boot 2.1.1 , Spring Security 2.1.1, JWT token, REST API, JPA, MYSQL DB. 
 
 ------------------------------------------------------------
  Steps to run postman endpoints
@@ -21,3 +25,10 @@ Steps to run True-caller-rest Version 1.0.0 are given below:
  4. rest to fetch data you can you /search/{phone_number} , /search/user/{name} endpoints
  5 To mark spam use /spam/{phone_number}/{mark_spam} endpoint 
  6.To mark spam use /block/{phone_number}/{mark_blocked} endpoint
+
+--------------------------------------------------------------------
+         Updates to come
+--------------------------------------------------------------------
+1. Integration with spring cloud (v2.0.0)
+2. Remove db dependency (v2.0.0)
+3. Integration with Angular 9 front end.(v3.0.0)
