@@ -20,3 +20,4 @@ Steps to run True-caller-rest Version 1.0.0 are given below:
  3. Register using /register the User with name, same phonenumber provided and emailAddress which is optional
  4. rest to fetch data you can you /search/{phone_number} , /search/user/{name} endpoints
  5 To mark spam use /spam/{phone_number}/{mark_spam} endpoint 
+ 6.To mark spam use /block/{phone_number}/{mark_blocked} endpoint
