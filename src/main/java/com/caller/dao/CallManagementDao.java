@@ -24,4 +24,10 @@ public interface CallManagementDao extends CrudRepository<RegisterUser, Integer>
             nativeQuery = true)
 	void update(String phonenumber, boolean spam);
 
+	@Transactional
+    @Modifying
+    @Query(value = "UPDATE true_caller.user_info u set block =:block where u.phone_number = :phonenumber",
+            nativeQuery = true)
+	void block(String phonenumber, boolean block);
+
 }

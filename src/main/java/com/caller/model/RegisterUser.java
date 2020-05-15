@@ -38,6 +38,10 @@ public class RegisterUser {
 	@JsonProperty("spam")
 	private boolean spam = false;
 	
+	@Column
+	@JsonProperty("block")
+	private boolean block = false;
+	
 	public long getId() {
 		return id;
 	}
@@ -76,6 +80,14 @@ public class RegisterUser {
 
 	public void setSpam(boolean spam) {
 		this.spam = spam;
+	}
+
+	public boolean isBlock() {
+		return block;
+	}
+
+	public void setBlock(boolean block) {
+		this.block = block;
 	}
 	
 	
