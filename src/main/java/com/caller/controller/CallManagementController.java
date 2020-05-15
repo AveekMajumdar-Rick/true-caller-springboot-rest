@@ -46,6 +46,12 @@ public class CallManagementController {
 	@PutMapping(value = { "/spam" , "/spam/{phone_number}/{mark_spam}" } )
 	public String markSpam(@PathVariable(name = "phone_number", required = true) String phonenumber,
 			@PathVariable(name = "mark_spam", required = true) boolean spam) throws Exception {
-		return callManagementService.update(phonenumber, spam);
+		return callManagementService.update(phonenumber, spam, request);
+	}
+	
+	@PutMapping(value = { "/block" , "/block/{phone_number}/{mark_blocked}" } )
+	public String blockUser(@PathVariable(name = "phone_number", required = true) String phonenumber,
+			@PathVariable(name = "mark_blocked", required = true) boolean block) throws Exception {
+		return callManagementService.blockUser(phonenumber, block, request);
 	}
 }

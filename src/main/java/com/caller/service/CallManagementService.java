@@ -29,6 +29,13 @@ public class CallManagementService {
 
 	public static final Logger log = LoggerFactory.getLogger(CallManagementService.class);
 
+	/**
+	 * register new user
+	 * 
+	 * @param user
+	 * @param request
+	 * @return
+	 */
 	public RegisterUser create(RegisterUser user, HttpServletRequest request) {
 		if (user == null) {
 			log.error("User not found");
@@ -50,6 +57,12 @@ public class CallManagementService {
 		return callManagementDao.save(user);
 	}
 
+	/**
+	 *find user by phone number 
+	 * 
+	 * @param phonenumber
+	 * @return
+	 */
 	public RegisterUser findByPhonenumber(String phonenumber) {
 		RegisterUser existingUser = callManagementDao.findUserByPhonenumber(phonenumber);
 		if (existingUser == null) {
@@ -59,6 +72,12 @@ public class CallManagementService {
 		return existingUser;
 	}
 
+	/**
+	 * find user by name 
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public List<RegisterUser> findByName(String name) {
 		List<RegisterUser> userList = callManagementDao.findByName(name);
 		if (CollectionUtils.isEmpty(userList)) {
@@ -68,9 +87,27 @@ public class CallManagementService {
 		return userList;
 	}
 
-	public String update(String phonenumber, boolean spam) throws Exception {
+	/**
+	 * 
+	 * mark user as spam
+	 * 
+	 * @param phonenumber
+	 * @param spam
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	public String update(String phonenumber, boolean spam, HttpServletRequest request) throws Exception {
 		RegisterUser existingUser = findByPhonenumber(phonenumber);
 		try {
+			// match the logged-in user
+			String username = getUsernameFromAuthToken(request);
+
+			if (username.equals(existingUser.getPhonenumber())) {
+				log.error("User is not allowed to mark spam with phonenumber : " + existingUser.getPhonenumber());
+				throw new UnAuthorizedException("User is not allowed to mark spam with phonenumber : "
+						+ existingUser.getPhonenumber() + " for logged-in user : " + username);
+			}
 			callManagementDao.update(existingUser.getPhonenumber(), spam);
 		} catch (Exception e) {
 			log.error("unable to mark spam for phonenumber : " + phonenumber);
@@ -109,5 +146,36 @@ public class CallManagementService {
 			log.warn("JWT Token does not begin with Bearer String");
 		}
 		return username;
+	}
+
+	/**
+	 * block user 
+	 * 
+	 * @param phonenumber
+	 * @param block
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	public String blockUser(String phonenumber, boolean block, HttpServletRequest request) throws Exception {
+		RegisterUser existingUser = findByPhonenumber(phonenumber);
+		try {
+			// match the logged-in user
+			String username = getUsernameFromAuthToken(request);
+
+			if (username.equals(existingUser.getPhonenumber())) {
+				log.error("User is not allowed to mark block with phonenumber : " + existingUser.getPhonenumber());
+				throw new UnAuthorizedException("User is not allowed to mark block with phonenumber : "
+						+ existingUser.getPhonenumber() + " for logged-in user : " + username);
+			}
+			callManagementDao.block(existingUser.getPhonenumber(), block);
+		} catch (Exception e) {
+			log.error("unable to block for phonenumber : " + phonenumber);
+			throw new Exception("unable to block for phonenumber : " + phonenumber);
+		}
+		if (block)
+			return "User blocked successfully";
+		else
+			return "User is not blocked";
 	}
 }
