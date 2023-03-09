@@ -16,8 +16,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 		<start-class>com.caller.SpringBootStarterApplication</start-class>
+		<dockerfile-maven-version>1.4.10</dockerfile-maven-version>
 	</properties>
 
 	<dependencies>
@@ -70,7 +71,31 @@
 	</dependencies>
 
 	<build>
-		<finalName>True-caller-rest</finalName>
+		<finalName>true-caller-rest</finalName>
+		<plugins>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>${dockerfile-maven-version}</version>
+				<executions>
+					<execution>
+						<id>default</id>
+						<goals>
+							<goal>build</goal>
+							<goal>push</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<repository>rest/true-caller</repository>
+					<tag>${project.version}</tag>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
 	</build>
 
 </project>
